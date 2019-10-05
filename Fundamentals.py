@@ -16,30 +16,7 @@ def Mtrx(L,n,m='same'):
             Mat[(i//m,i%m)]=0
     Mat['n'],Mat['m']=n,m
     return Mat
-def MtrxMltpl(A,B,n='natural',m='natural'):
-    #A, B should be matices in dictionary form
-    #n number of lines, m number of rows, of desired product
-    if n=='natural':
-        n=A['m']
-    if m=='natural':
-        m=B['n']
-    Mat={}
-    for i in range(n):
-        for j in range(m):
-            Mat[(i,j)]=0
-            for k in range(max(n,m)):
-                try:
-                    Mat[(i,j)]+=A[(i,k)]*B[(k,j)]
-                except:
-                    Mat[(i,j)]+=0
-    Mat['n'],Mat['m']=n,m
-    return Mat
-def SclrMltpl(A,s):
-    #A should be matix, s an integer
-    Scal={}
-    for i in A:
-        Scal[i]=A[i]*s
-    return Scal
+
 def IMtrx(n,s=1):
     Mat={}
     for i in range(n):
@@ -50,19 +27,42 @@ def IMtrx(n,s=1):
                 Mat[i,k]=0
     Mat['n'],Mat['m']=n,n
     return Mat
+
 def PrntMtrx(A):
     for i in range(A['n']):
         p=''
         for j in range(A['m']):
-            p+=str((A[i,j]))+',  '*(j!=A['m']-1)
+            p+=',  '*(j!=0)+str((A[i,j]))
         print(p)
     return
+
+def MtrxMltpl(A,B,n='natural',m='natural'):
+    #A, B should be matices in dictionary form
+    #n number of lines, m number of rows, of desired product
+    if n=='natural':
+        n=A['n']
+    if m=='natural':
+        m=B['m']
+    Mat={}
+    for i in range(n):
+        for j in range(m):
+            Mat[(i,j)]=0
+            for k in range(max(n,m)):
+                try:
+                    Mat[(i,j)]+=A[(i,k)]*B[(k,j)]
+                except:
+                    continue
+    Mat['n'],Mat['m']=n,m
+    return Mat
+
+def SclrMltpl(A,s):
+    #A should be matix, s an integer
+    Scal={}
+    for i in A:
+        Scal[i]=A[i]*s
+    return Scal
+
 A=Mtrx([1,2,3,4,5],2,3)
-B=Mtrx([2,0,0,2],2)
-C=MtrxMltpl(A,B)
+B=Mtrx([6,4,3,1],2)
 D=SclrMltpl(A,2)
-E=MtrxMltpl(A,IMtrx(3,2))
 F=MtrxMltpl(IMtrx(3,2),IMtrx(3,2))
-PrntMtrx(F)
-print('\n')
-PrntMtrx(E)
