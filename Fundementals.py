@@ -20,17 +20,16 @@ def MtrxMltpl(A,B,n,m='same'):
     #n number of lines, m number of rows, of desired product
     if m=='same':
         m=n
-    C={}
-    kull=min(n,m)
+    Mat={}
     for i in range(n):
         for j in range(m):
-            C[(i,j)]=0
-            for k in range(kull):
+            Mat[(i,j)]=0
+            for k in range(max(n,m)):
                 try:
-                    C[(i,j)]+=A[(i,k)]*B[(k,j)]
+                    Mat[(i,j)]+=A[(i,k)]*B[(k,j)]
                 except:
-                    C[(i,j)]+=0
-    return C
+                    Mat[(i,j)]+=0
+    return Mat
 def SclrMltpl(A,s):
     #A should be matix, s an integer
     Scal={}
@@ -51,5 +50,6 @@ A=Mtrx([1,2,3,4,5],2,3)
 B=Mtrx([2,0,0,2],2)
 C=MtrxMltpl(A,B,2)
 D=(SclrMltpl(A,2))
-E=MtrxMltpl(A,IMtrx(2,2),2,3)
-F=IMtrx(3)
+E=MtrxMltpl(A,IMtrx(3,2),2,3)
+F=MtrxMltpl(IMtrx(3,2),IMtrx(3,2),3)
+print(F)
