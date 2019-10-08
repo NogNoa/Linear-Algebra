@@ -25,23 +25,16 @@ def MtrxMltpl2(A,B,n='natural',m='natural'):
             L.append(Val)
     return Mtrx(L,n,m)
 
-def Mtrx2(L,m):
+def Mtrx2(L,n,m='natural'):
     #L should be a list, n number of lines, m number of rows
     Mat={}
     λ=len(L)
-    n=(λ//m)+1
-    for i in range(λ):
-        Mat[(i//m,i%m)]=L[i]
-    for i in range(λ,n*m):
-        Mat[(i//m,i%m)]=0
-    Mat['n'],Mat['m']=n,m
-    return Mat
-
-def Mtrx3(L,m,n='natural'):
-    #L should be a list, n number of lines, m number of rows
-    Mat={}
-    λ=len(L)
-    if n=='natural':
+    if m=='natural':
+        #we only need the collomn argument,
+        #but the linear-algebra savvy user 
+        #expect the order to be n,m when he
+        #enters two arguments.
+        m=n 
         n=(λ//m)+1
     for i in range(λ):
         Mat[(i//m,i%m)]=L[i]
@@ -50,4 +43,4 @@ def Mtrx3(L,m,n='natural'):
     Mat['n'],Mat['m']=n,m
     return Mat
 
-A=Mtrx3([1,2,3,4,5,6,7],6,3)
+A=Mtrx2([1,2,3,4,5,6,7],6,3)
