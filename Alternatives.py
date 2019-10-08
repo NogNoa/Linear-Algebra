@@ -24,3 +24,30 @@ def MtrxMltpl2(A,B,n='natural',m='natural'):
                     continue
             L.append(Val)
     return Mtrx(L,n,m)
+
+def Mtrx2(L,m):
+    #L should be a list, n number of lines, m number of rows
+    Mat={}
+    λ=len(L)
+    n=(λ//m)+1
+    for i in range(λ):
+        Mat[(i//m,i%m)]=L[i]
+    for i in range(λ,n*m):
+        Mat[(i//m,i%m)]=0
+    Mat['n'],Mat['m']=n,m
+    return Mat
+
+def Mtrx3(L,m,n='natural'):
+    #L should be a list, n number of lines, m number of rows
+    Mat={}
+    λ=len(L)
+    if n=='natural':
+        n=(λ//m)+1
+    for i in range(λ):
+        Mat[(i//m,i%m)]=L[i]
+    for i in range(λ,n*m):
+        Mat[(i//m,i%m)]=0
+    Mat['n'],Mat['m']=n,m
+    return Mat
+
+A=Mtrx3([1,2,3,4,5,6,7],6,3)
