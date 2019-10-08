@@ -4,16 +4,16 @@ Created on Fri Oct  4 20:19:16 2019
 
 @author: omer
 """
-def Mtrx(L,n,m='same'):
+def Mtrx(L,m,n='natural'):
     #L should be a list, n number of lines, m number of rows
-    if m=='same':
-        m=n
     Mat={}
-    for i in range(n*m):
-        try:
-            Mat[(i//m,i%m)]=L[i]
-        except:
-            Mat[(i//m,i%m)]=0
+    λ=len(L)
+    if n=='natural':
+        n=(λ//m)+1
+    for i in range(λ):
+        Mat[(i//m,i%m)]=L[i]
+    for i in range(λ,n*m):
+        Mat[(i//m,i%m)]=0
     Mat['n'],Mat['m']=n,m
     return Mat
 
