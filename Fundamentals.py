@@ -66,8 +66,31 @@ def SclrMltpl(A,s):
         Scal[i]=A[i]*s
     return Scal
 
+def reWrite(A,n='same',m='same'):
+    if n=='same':
+        n=A['n']
+    if m=='same':
+        m=A['m']                    
+    Mat={}
+    for i in range(n):
+        for j in range(m):
+            if (i,j) in A:
+                 Mat[(i,j)]=A[(i,j)]
+            else:
+               Mat[(i,j)]=0
+    Mat['n'],Mat['m']=n,m
+    return Mat
+
+def QuickMltpl(L,n,R,m='same'):
+    if m=='same':
+        m=n
+    Mat=MtrxMltpl(Mtrx(L,n),Mtrx(R,m))
+    PrntMtrx(Mat)
+    return    
+
 A=Mtrx([1,2,3,4,5],2)
 B=Mtrx([6,4,3,1],1)
 C=MtrxMltpl(A,B)
 D=SclrMltpl(A,2)
 F=MtrxMltpl(IMtrx(3,2),IMtrx(3,2))
+E=reWrite(A,'same',3)
