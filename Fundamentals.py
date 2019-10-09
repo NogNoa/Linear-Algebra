@@ -4,12 +4,18 @@ Created on Fri Oct  4 20:19:16 2019
 
 @author: omer
 """
-def Mtrx(L,m,n='natural'):
+import math
+def Mtrx(L,n,m='natural'):
     #L should be a list, n number of lines, m number of rows
     Mat={}
     λ=len(L)
-    if n=='natural':
-        n=(λ//m)+1
+    if m=='natural':
+        #we only need the collomn argument,
+        #but the linear-algebra savvy user 
+        #expect the order to be n,m when he
+        #enters two arguments.
+        m=n 
+        n=math.ceil(λ/m)
     for i in range(λ):
         Mat[(i//m,i%m)]=L[i]
     for i in range(λ,n*m):
@@ -44,14 +50,12 @@ def MtrxMltpl(A,B,n='natural',m='natural'):
     if m=='natural':
         m=B['m']
     Mat={}
+    lum=min(A['m'],B['n'])
     for i in range(n):
         for j in range(m):
             Mat[(i,j)]=0
-            for k in range(max(n,m)):
-                try:
-                    Mat[(i,j)]+=A[(i,k)]*B[(k,j)]
-                except:
-                    continue
+            for k in range(lum):
+                Mat[(i,j)]+=A[(i,k)]*B[(k,j)]
     Mat['n'],Mat['m']=n,m
     return Mat
 
@@ -62,7 +66,8 @@ def SclrMltpl(A,s):
         Scal[i]=A[i]*s
     return Scal
 
-A=Mtrx([1,2,3,4,5],2,3)
-B=Mtrx([6,4,3,1],2)
+A=Mtrx([1,2,3,4,5],2)
+B=Mtrx([6,4,3,1],1)
+C=MtrxMltpl(A,B)
 D=SclrMltpl(A,2)
 F=MtrxMltpl(IMtrx(3,2),IMtrx(3,2))
