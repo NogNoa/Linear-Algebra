@@ -35,7 +35,7 @@ def Mtrx2(L,n,m='natural'):
         #expect the order to be n,m when he
         #enters two arguments.
         m=n 
-        n=(λ//m)+1
+        n=int(λ/m+(λ/m)%1) #rounding up λ/m
     for i in range(λ):
         Mat[(i//m,i%m)]=L[i]
     for i in range(λ,n*m):
@@ -43,4 +43,6 @@ def Mtrx2(L,n,m='natural'):
     Mat['n'],Mat['m']=n,m
     return Mat
 
-A=Mtrx2([1,2,3,4,5,6,7],6,3)
+A=Mtrx2([1,2,3,4,5,6,7],3,6)
+
+#ToDo: unite MtrxMltpl and QuickMltply
